@@ -19,12 +19,12 @@ Either:
 Or host it at a permanent URL with **GitHub Pages** (free for this public repo):
 
 1. Open the repo's **Settings → Pages**.
-2. Under *Build and deployment*, set Source to **Deploy from a branch**, pick branch
-   `claude/serene-cray-218h6t` and folder `/ (root)`, then **Save**.
-3. After a minute the dashboard is live at
-   <https://alexjjones27.github.io/Perpetual_Dashboard/>. Every push to that branch redeploys it.
+2. Under *Build and deployment*, set **Source** to **GitHub Actions**. Nothing else to pick.
+3. Open the **Actions** tab, select *Deploy dashboard to GitHub Pages*, and click
+   **Run workflow** (or push any commit). About a minute later the dashboard is live at
+   <https://alexjjones27.github.io/Perpetual_Dashboard/>. Every push redeploys it.
 
-The `.nojekyll` file tells Pages to serve the files as they are, without a Jekyll build.
+The workflow is `.github/workflows/pages.yml`; it publishes only `index.html`, `css/` and `js/`.
 
 Press F11 for full screen. The layout targets 1920×1080 and stacks on narrow screens.
 

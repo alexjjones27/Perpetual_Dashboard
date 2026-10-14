@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equity Perps Monitor</title>
+  <meta name="description" content="Live equity-perpetuals monitor: normalized flow, positioning, funding, basis and liquidity metrics from Hyperliquid HIP-3 markets.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Equity Perps Monitor</h1>
+      <span class="venue" id="venueLabel">Hyperliquid HIP-3</span>
+    </div>
+    <div class="session" id="session" aria-live="polite"></div>
+    <div class="status">
+      <span class="pill" id="wsStatus" title="WebSocket trade and candle feed">WS: connecting</span>
+      <span class="pill" id="restStatus" title="Last REST snapshot">REST: waiting</span>
+      <span class="pill" id="warmStatus" title="History loaded for tracked markets">Warm-up 0/0</span>
+      <span class="clock" id="clock"></span>
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
+      <button class="btn" id="settingsBtn" type="button" aria-expanded="false" aria-controls="settings">Settings</button>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Market context"></section>
+
+  <section class="filters" aria-label="Filters">
+    <div class="seg" id="windowSeg" role="radiogroup" aria-label="Signal window"></div>
+    <div class="seg" id="classSeg" role="radiogroup" aria-label="Asset class"></div>
+    <label class="check"><input type="checkbox" id="showAll"> All listings (incl. untracked)</label>
+    <input class="search" id="search" type="search" placeholder="Filter ticker" aria-label="Filter ticker">
+    <span class="hint" id="filterHint"></span>
+  </section>
+
+  <main class="layout">
+    <section class="card table-card" aria-label="Signal scorecard">
+      <div class="card-head">
+        <h2>Scorecard</h2>
+        <span class="sub" id="tableSub"></span>
+      </div>
+      <div class="table-wrap" id="tableWrap">
+        <table class="grid" id="grid">
+          <thead id="gridHead"></thead>
+          <tbody id="gridBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card alerts-card" aria-label="Alerts">
+      <div class="card-head">
+        <h2>Alerts</h2>
+        <span class="sub">Event-conditioned triggers, 20 min cooldown per market</span>
+        <button class="btn small" id="clearAlerts" type="button">Clear</button>
+      </div>
+      <ol class="alerts" id="alerts"></ol>
+    </section>
+
+    <section class="card scatter-card" aria-label="Positioning map">
+      <div class="card-head">
+        <h2>Positioning map</h2>
+        <span class="sub" id="scatterSub"></span>
+      </div>
+      <div class="chart" id="scatter"></div>
+    </section>
+
+    <section class="card detail-card" aria-label="Market detail">
+      <div id="detail"></div>
+    </section>
+  </main>
+
+  <aside class="settings" id="settings" hidden>
+    <div class="settings-inner">
+      <div class="card-head">
+        <h2>Settings</h2>
+        <button class="btn small" id="settingsClose" type="button">Close</button>
+      </div>
+      <form id="settingsForm"></form>
+      <p class="fine">Settings and rolling history are kept in this browser only (localStorage). Data: Hyperliquid public info API and WebSocket, polled within the published rate limits.</p>
+    </div>
+  </aside>
+
+  <div class="tooltip" id="tooltip" role="status" hidden></div>
+
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/metrics.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
